@@ -34,7 +34,7 @@
               <a href="#" class="label-text-alt">Forgot password?</a>
             </label>
           </div>
-          <div class="form-control mt-6">
+          <div class="form-control mt-6" @click="clickTologin">
             <input type="button" value="Login" class="btn btn-primary" />
           </div>
         </div>
@@ -44,12 +44,25 @@
 </template>
 
 <script>
+import {login} from '../../network/welcome'
+
 export default {
   name: "welcome",
   components: {},
   computed: {},
-  data() {},
-  methods() {},
+  data() {
+      return {
+
+      };
+  },
+  methods:{
+      clickTologin(){
+          login({
+              number:'191541227',
+              password:'123456'
+          });
+      }
+  },
 };
 </script>
 
