@@ -3,16 +3,18 @@
   <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <div id="app">
     <!-- <router-view></router-view> -->
+      <tail-wind></tail-wind>
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-
+import tailWind from './components/test/tailWind.vue'
 export default {
   name: "App",
   components: {
     // HelloWorld
+    tailWind
   },
 };
 </script>
