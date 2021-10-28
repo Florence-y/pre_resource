@@ -18,6 +18,9 @@ export default {
     // HelloWorld
     // welcome,
   },
+  setup(){
+    
+  }
 };
 </script>
 
