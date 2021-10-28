@@ -34,8 +34,8 @@
               <a href="#" class="label-text-alt">Forgot password?</a>
             </label>
           </div>
-          <div class="form-control mt-6" @click="clickTologin">
-            <input type="button" value="Login" class="btn btn-primary" />
+          <div class="form-control mt-6" >
+            <input type="button" @click="clickTologin" value="Login" class="btn btn-primary" />
           </div>
         </div>
       </div>
@@ -60,6 +60,8 @@ export default {
           login({
               number:'191541227',
               password:'123456'
+          }).then((data)=>{
+            console.log(data.data.number);
           });
       }
   },
