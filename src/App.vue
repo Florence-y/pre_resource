@@ -2,20 +2,21 @@
   <!-- <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <div id="app">
-    <!-- <router-view></router-view> -->
-    <welcome></welcome>
+    
+    <router-view></router-view>
+    <!-- <welcome></welcome> -->
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 // import tailWind from './components/test/tailWind.vue'
-import welcome from "./views/welcome/welcome.vue";
+// import welcome from "./views/welcome/welcome.vue";
 export default {
   name: "App",
   components: {
     // HelloWorld
-    welcome,
+    // welcome,
   },
 };
 </script>

@@ -1,12 +1,14 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import {
+  createRouter,
+  createWebHistory
+} from 'vue-router'
+import welcome from '../views/welcome/welcome.vue'
 
-Vue.use(VueRouter);
 
 const routes = [{
     path: '/welcome',
-      name: 'welcome',
-      component: () => import('views/welcome/welcome.vue')
+    name: 'welcome',
+    component: welcome
   },
   {
     path: '/',
@@ -18,8 +20,8 @@ const routes = [{
   }
 ];
 
-const router = new VueRouter({
-  mode: 'history',
+const router = createRouter({
+      history: createWebHistory(process.env.BASE_URL),
   routes
 });
 
