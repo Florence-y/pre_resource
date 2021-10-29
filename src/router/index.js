@@ -1,9 +1,12 @@
 import {
   createRouter,
   createWebHistory
-} from 'vue-router'
-import welcome from '../views/welcome/welcome.vue'
+}
+from 'vue-router'
 
+
+import welcome from '../views/welcome/welcome.vue'
+import home from '../views/home/Home.vue'
 
 const routes = [{
     path: '/welcome',
@@ -17,11 +20,14 @@ const routes = [{
   {
     path: '/index.html',
     redirect: '/welcome'
+  }, {
+    path: '/home',
+    component: home
   }
 ];
 
 const router = createRouter({
-      history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),
   routes
 });
 
