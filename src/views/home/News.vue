@@ -1,4 +1,5 @@
 <template>
+  <div class="cardContainer">
     <div class="card bordered">
       <figure>
         <img src="https://picsum.photos/id/1005/400/250" />
@@ -52,6 +53,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -61,8 +63,15 @@ export default {
 </script>
 
 <style scoped>
-.card{
-    width: 33.3%;
-    float: left;
+.card {
+  /* width: 33.3%;
+  float: left; */
+}
+.cardContainer{
+    /* width: 100%;
+    height: 500px; */
+    display: flex;
+    justify-content:center;
+    align-items:center;
 }
 </style>
