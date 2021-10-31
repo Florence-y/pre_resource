@@ -18,17 +18,32 @@
       </div>
       <ul
         tabindex="0"
-        class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
+        class="
+          p-2
+          shadow
+          menu
+          dropdown-content
+          bg-base-100
+          rounded-box
+          w-52
+          functionContainer
+        "
       >
-        <li>
-          <a>Item 1</a>
-        </li>
-        <li>
-          <a>Item 2</a>
-        </li>
-        <li>
-          <a>Item 3</a>
-        </li>
+        <div v-if="roleTag==0">
+          <li v-for="item in viewer" :key="item.message">
+            <a>{{ item }}</a>
+          </li>
+        </div>
+        <div v-if="roleTag==1">
+          <li v-for="item in manger" :key="item.message">
+            <a>{{ item }}</a>
+          </li>
+        </div>
+        <div v-if="roleTag==2">
+          <li v-for="item in root" :key="item.message">
+            <a>{{ item }}</a>
+          </li>
+        </div>
       </ul>
     </div>
     <div class="flex-1 hidden px-2 mx-2 lg:flex">
@@ -86,8 +101,19 @@
 <script>
 export default {
   name: "NavBar",
+  data() {
+    return {
+      viewer: ["物资申请", "报销申请", "个人信息"],
+      manger: ["物资申请", "报销申请", "新建物资", "个人信息"],
+      root: ["物资申请", "报销申请", "新建物资", "个人信息", "用户管理"],
+      roleTag:2,
+    };
+  },
 };
 </script>
 
 <style>
+.functionContainer {
+  color: black;
+}
 </style>
