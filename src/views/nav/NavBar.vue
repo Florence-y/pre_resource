@@ -29,19 +29,19 @@
           functionContainer
         "
       >
-        <div v-if="roleTag==0">
+        <div v-if="roleTag == 0">
           <li v-for="item in viewer" :key="item.message">
-            <a>{{ item }}</a>
+            <a @click="moveInTo(item)">{{ item }}</a>
           </li>
         </div>
-        <div v-if="roleTag==1">
+        <div v-if="roleTag == 1">
           <li v-for="item in manger" :key="item.message">
-            <a>{{ item }}</a>
+            <a @click="moveInTo(item)">{{ item }}</a>
           </li>
         </div>
-        <div v-if="roleTag==2">
+        <div v-if="roleTag == 2">
           <li v-for="item in root" :key="item.message">
-            <a>{{ item }}</a>
+            <a @click="moveInTo(item)">{{ item }}</a>
           </li>
         </div>
       </ul>
@@ -106,8 +106,23 @@ export default {
       viewer: ["物资申请", "报销申请", "个人信息"],
       manger: ["物资申请", "报销申请", "新建物资", "个人信息"],
       root: ["物资申请", "报销申请", "新建物资", "个人信息", "用户管理"],
-      roleTag:2,
+      roleTag: 2,
     };
+  },
+  methods: {
+    moveInTo(item) {
+      if (item === "物资申请") {
+        this.$router.push("/resourceRequest");
+      } else if (item === "报销申请") {
+        this.$router.push("/reimbursementRequest");
+      } else if (item === "个人信息") {
+        this.$router.push("/profie");
+      } else if (item === "新建物资") {
+        this.$router.push("/creteResource");
+      } else if (item === "用户管理") {
+        this.$router.push("/usersManage");
+      }
+    },
   },
 };
 </script>

@@ -6,7 +6,7 @@ export default {
   components:{},
   computed:{},
   data() {},
-  methods(){},
+  methods:{},
 };
 </script>
 
