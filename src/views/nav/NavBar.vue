@@ -49,9 +49,9 @@
     <div class="flex-1 hidden px-2 mx-2 lg:flex">
       <span class="text-lg font-bold"> daisyUI </span>
     </div>
-    <div class="flex-1 lg:flex-none">
+    <div class="flex-1 lg:flex-none w-1/5 justify-center">
       <div class="form-control">
-        <input type="text" placeholder="Search" class="input input-ghost" />
+        <input type="text" placeholder="Search" class="input input-ghost" style="width:250px" />
       </div>
     </div>
     <div class="flex-none">

@@ -7,6 +7,8 @@ from 'vue-router'
 
 import welcome from '../views/welcome/welcome.vue'
 import home from '../views/home/Home.vue'
+import ResourceRequest from '../views/subpage/ResourceRequest.vue'
+
 
 const routes = [{
     path: '/welcome',
@@ -23,6 +25,9 @@ const routes = [{
   }, {
     path: '/home',
     component: home
+  }, {
+    path: '/resourceRequest',
+      component: ResourceRequest
   }
 ];
 

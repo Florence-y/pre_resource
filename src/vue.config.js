@@ -10,6 +10,13 @@ module.exports = {
         'plugins': resolve('src/plugins'),
         'views': resolve('src/views'),
       }
+    },
+    module: {
+        rules: [{
+          test: /\.mjs$/,
+          include: /node_modules/,
+          type: "javascript/auto"
+        }]
     }
   }
 }
