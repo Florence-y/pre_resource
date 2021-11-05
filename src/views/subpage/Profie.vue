@@ -81,7 +81,7 @@
           <button class="btn">上传头像</button>
         </div>
       </div>
-      <div class="profieMainContent">
+      <div class="profieMainContent flex-row space-y-3">
         <div class="form-control">
           <label class="input-group">
             <span>用户名</span>
@@ -91,6 +91,62 @@
               class="input input-bordered w-2/6"
             />
           </label>
+        </div>
+        <div class="form-control">
+          <label class="input-group">
+            <span>个人签名</span>
+            <input
+              type="text"
+              placeholder="info@site.com"
+              class="input input-bordered w-2/6"
+            />
+          </label>
+        </div>
+        <div class="form-control">
+          <label class="input-group">
+            <span>用户名</span>
+            <input
+              type="text"
+              placeholder="info@site.com"
+              class="input input-bordered w-2/6"
+            />
+          </label>
+        </div>
+        <div class="form-control">
+          <label class="input-group">
+            <span>用户名</span>
+            <input
+              type="text"
+              placeholder="info@site.com"
+              class="input input-bordered w-2/6"
+            />
+          </label>
+        </div>
+        <div class="manOrWoman p-6 card bordered w-1/4 flex-row space-x-4">
+          <div class="form-control">
+            <label class="cursor-pointer label">
+              <span class="label-text">男</span>
+              <input
+                type="radio"
+                name="opt"
+                checked="checked"
+                class="radio"
+                value=""
+              />
+            </label>
+          </div>
+          <div class="form-control">
+            <label class="cursor-pointer label">
+              <span class="label-text">女</span>
+              <input
+                type="radio"
+                name="opt"
+                checked="checked"
+                class="radio radio-primary"
+                value=""
+              />
+            </label>
+          </div>
         </div>
       </div>
     </div>
