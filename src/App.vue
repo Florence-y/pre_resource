@@ -1,11 +1,11 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <div id="app">
-    
-    <router-view></router-view>
-    <!-- <welcome></welcome> -->
-  </div>
+    <div id="app">
+
+      <router-view></router-view>
+      <!-- <welcome></welcome> -->
+    </div>
 </template>
 
 <script>
@@ -18,9 +18,9 @@ export default {
     // HelloWorld
     // welcome,
   },
-  setup(){
+  setup() {
     
-  }
+  },
 };
 </script>
 
@@ -34,7 +34,6 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 } */
-#app{
-
+#app {
 }
 </style>
