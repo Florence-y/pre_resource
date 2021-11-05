@@ -74,13 +74,15 @@
       </tbody>
     </table>
   </div>
+  <element></element>
 </template>
 
 <script>
 import NavBar from "../nav/NavBar.vue";
+import element from "../../components/test/element.vue"
 export default {
   name: "UsersManage",
-  components: { NavBar },
+  components: { NavBar,element},
   data() {
     return {
       users: [
