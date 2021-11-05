@@ -74,15 +74,15 @@
       </tbody>
     </table>
   </div>
-  <element></element>
+    <!-- <element-upload></element-upload> -->
 </template>
 
 <script>
 import NavBar from "../nav/NavBar.vue";
-import element from "../../components/test/element.vue"
+// import ElementUpload from "../../components/common/Element-Upload.vue"
 export default {
   name: "UsersManage",
-  components: { NavBar,element},
+  components: { NavBar},
   data() {
     return {
       users: [
