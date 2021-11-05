@@ -51,7 +51,12 @@
     </div>
     <div class="flex-1 lg:flex-none w-1/5 justify-center">
       <div class="form-control">
-        <input type="text" placeholder="Search" class="input input-ghost" style="width:250px" />
+        <input
+          type="text"
+          placeholder="Search"
+          class="input input-ghost"
+          style="width: 250px"
+        />
       </div>
     </div>
     <div class="flex-none">
@@ -103,10 +108,10 @@ export default {
   name: "NavBar",
   data() {
     return {
-      viewer: ["物资申请", "报销申请", "个人信息"],
-      manger: ["物资申请", "报销申请", "新建物资", "个人信息"],
-      root: ["物资申请", "报销申请", "新建物资", "个人信息", "用户管理"],
-      roleTag: 2,
+      viewer: ["物资申请", "个人信息", "我的申请"],
+      manger: ["物资申请", "个人信息", "我的申请", "资源管理","审批管理"],
+      root: ["资源管理", "个人信息", "用户管理"],
+      roleTag: 1,
     };
   },
   methods: {

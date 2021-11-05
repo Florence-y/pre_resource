@@ -9,6 +9,9 @@ import welcome from '../views/welcome/welcome.vue'
 import home from '../views/home/Home.vue'
 import ResourceRequest from '../views/subpage/ResourceRequest.vue'
 import UsersManage from '../views/subpage/UsersMange.vue'
+// import Profie from '../views/subpage/Profie.Vue'
+import Profie from '../views/subpage/Profie.vue'
+
 
 const routes = [{
     path: '/welcome',
@@ -31,6 +34,9 @@ const routes = [{
   }, {
     path: '/usersManage',
     component: UsersManage
+  }, {
+    path: '/profie',
+    component: Profie
   }
 ];
 
