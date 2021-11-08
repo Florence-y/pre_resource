@@ -12,6 +12,7 @@ import UsersManage from '../views/subpage/UsersMange.vue'
 import Profie from '../views/subpage/Profie.vue'
 import MyRequest from '../views/subpage/MyRequst.vue'
 import ResoucreManage from '../views/subpage/ResourceManage.vue'
+import ExamineManage from '../views/subpage/ExamineManage.vue'
 
 
 const routes = [{
@@ -44,6 +45,9 @@ const routes = [{
   }, {
     path: '/resourceManage',
     component: ResoucreManage
+  }, {
+    path: '/examineManage',
+    component: ExamineManage
   }
 ];
 
