@@ -109,7 +109,7 @@ export default {
   data() {
     return {
       viewer: ["物资申请", "个人信息", "我的申请"],
-      manger: ["物资申请", "个人信息", "我的申请", "资源管理","审批管理"],
+      manger: ["物资申请", "个人信息", "我的申请", "资源管理", "审批管理"],
       root: ["资源管理", "个人信息", "用户管理"],
       roleTag: 1,
     };
@@ -122,10 +122,14 @@ export default {
         this.$router.push("/reimbursementRequest");
       } else if (item === "个人信息") {
         this.$router.push("/profie");
-      } else if (item === "新建物资") {
-        this.$router.push("/creteResource");
       } else if (item === "用户管理") {
         this.$router.push("/usersManage");
+      } else if (item === "资源管理") {
+        this.$router.push("/resourceManage");
+      } else if (item === "审批管理") {
+        this.$router.push("/examineManage");
+      } else if (item === "我的申请") {
+        this.$router.push("/myRequest");
       }
     },
   },

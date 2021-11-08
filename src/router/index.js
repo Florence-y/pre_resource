@@ -9,8 +9,9 @@ import welcome from '../views/welcome/welcome.vue'
 import home from '../views/home/Home.vue'
 import ResourceRequest from '../views/subpage/ResourceRequest.vue'
 import UsersManage from '../views/subpage/UsersMange.vue'
-// import Profie from '../views/subpage/Profie.Vue'
 import Profie from '../views/subpage/Profie.vue'
+import MyRequest from '../views/subpage/MyRequst.vue'
+import ResoucreManage from '../views/subpage/ResourceManage.vue'
 
 
 const routes = [{
@@ -37,6 +38,12 @@ const routes = [{
   }, {
     path: '/profie',
     component: Profie
+  }, {
+    path: '/myRequest',
+    component: MyRequest
+  }, {
+    path: '/resourceManage',
+    component: ResoucreManage
   }
 ];
 

@@ -1,77 +1,43 @@
 <template>
-  <div class="cardContainer">
-    <div class="card bordered">
-      <figure>
-        <img src="https://picsum.photos/id/1005/400/250" />
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title">
-          Top image
-          <div class="badge mx-2 badge-secondary">NEW</div>
-        </h2>
-        <p>
-          Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit
-          sit necessitatibus veritatis sed molestiae voluptates incidunt iure
-          sapiente.
-        </p>
-        <div class="justify-end card-actions">
-          <button class="btn btn-secondary">More info</button>
-        </div>
-      </div>
-    </div>
-    <div class="card bordered">
-      <div class="card-body">
-        <h2 class="card-title">Image bottom</h2>
-        <p>
-          Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit
-          sit necessitatibus veritatis sed molestiae voluptates incidunt iure
-          sapiente.
-        </p>
-        <div class="card-actions">
-          <button class="btn btn-primary">Login</button>
-          <button class="btn btn-ghost">Register</button>
-        </div>
-      </div>
-      <figure>
-        <img src="https://picsum.photos/id/1005/400/250" />
-      </figure>
-    </div>
-    <div class="card bordered">
-      <figure>
-        <img src="https://picsum.photos/id/1005/60/40" />
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title">Small image file</h2>
-        <p>
-          Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit
-          sit necessitatibus veritatis sed molestiae voluptates incidunt iure
-          sapiente.
-        </p>
-        <div class="card-actions">
-          <div class="badge badge-ghost">Article</div>
-          <div class="badge badge-ghost">Photography</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <el-carousel indicator-position="outside">
+    <el-carousel-item v-for="item in imgsAndRef" :key="item">
+      <a :href="item.url">
+        <img border="0" :src="require('../../assets/img/'+item.img)" />
+      </a>
+    </el-carousel-item>
+  </el-carousel>
 </template>
 
 <script>
 export default {
   name: "News",
+  data() {
+    return {
+      imgsAndRef: [
+        { img: "2021guoqing.jpg", url: "http://www.baidu.com" },
+        { img: "dang100nian.jpg", url: "http://www.baidu.com" },
+        { img: "wangluoanquanzhou2021.jpg", url: "http://www.baidu.com" },
+      ],
+    };
+  },
 };
 </script>
 
 <style scoped>
-.card {
-  /* width: 33.3%;
-  float: left; */
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 18px;
+  opacity: 0.75;
+  line-height: 300px;
+  margin: 0;
+  text-align: center;
 }
-.cardContainer{
-    /* width: 100%;
-    height: 500px; */
-    display: flex;
-    justify-content:center;
-    align-items:center;
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
 }
 </style>
