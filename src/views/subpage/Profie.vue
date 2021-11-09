@@ -122,7 +122,7 @@
             />
           </label>
         </div>
-        <div class="manOrWoman p-6 card bordered w-1/4 flex-row space-x-4">
+        <div class="manOrWoman p-6 card bordered w-1/4 flex-row space-x-4">-
           <div class="form-control">
             <label class="cursor-pointer label">
               <span class="label-text">男</span>
