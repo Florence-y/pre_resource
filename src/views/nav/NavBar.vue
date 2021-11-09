@@ -47,7 +47,7 @@
       </ul>
     </div>
     <div class="flex-1 hidden px-2 mx-2 lg:flex">
-      <span class="text-lg font-bold"> daisyUI </span>
+      <a href="http://localhost:8081/home"><span class="text-lg font-bold"> 资源管理系统 </span></a>
     </div>
     <div class="flex-1 lg:flex-none w-1/5 justify-center">
       <div class="form-control">
