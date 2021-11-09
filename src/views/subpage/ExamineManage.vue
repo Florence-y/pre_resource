@@ -19,28 +19,28 @@
             <td>Cy Ganderton</td>
             <td>Quality Control Specialist</td>
             <td>Blue</td>
-            <td><button class="btn btn-success">同意</button></td>
+            <td><button class="btn btn-success">同意</button> <button class="btn btn-error">拒绝</button></td>
           </tr>
           <tr>
             <th>2</th>
             <td>Hart Hagerty</td>
             <td>Desktop Support Technician</td>
             <td>Purple</td>
-            <td><button class="btn btn-success">同意</button></td>
+            <td><button class="btn btn-success">同意</button> <button class="btn btn-error">拒绝</button></td>
           </tr>
           <tr>
             <th>3</th>
             <td>Brice Swyre</td>
             <td>Tax Accountant</td>
             <td>Red</td>
-            <td><button class="btn btn-success">同意</button></td>
+            <td><button class="btn btn-success">同意</button> <button class="btn btn-error">拒绝</button></td>
           </tr>
           <tr>
             <th>4</th>
             <td>Marjy Ferencz</td>
             <td>Office Assistant I</td>
             <td>Crimson</td>
-            <td><button class="btn btn-success">同意</button></td>
+            <td><button class="btn btn-success">同意</button> <button class="btn btn-error">拒绝</button></td>
           </tr>
         </tbody>
       </table>
