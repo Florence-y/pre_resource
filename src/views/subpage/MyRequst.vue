@@ -45,7 +45,7 @@
       <table class="table w-full">
         <thead>
           <tr>
-            <th></th>
+            <th>序号</th>
             <th>Name</th>
             <th>Job</th>
             <th>Favorite Color</th>
