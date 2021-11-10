@@ -2,7 +2,7 @@
   <el-carousel indicator-position="outside">
     <el-carousel-item v-for="item in imgsAndRef" :key="item">
       <a :href="item.url">
-        <img border="0" :src="require('../../assets/img/'+item.img)" />
+        <img :src="require('../../assets/img/'+item.img)" />
       </a>
     </el-carousel-item>
   </el-carousel>
@@ -28,7 +28,7 @@ export default {
   color: #475669;
   font-size: 18px;
   opacity: 0.75;
-  line-height: 300px;
+  line-height: 500px;
   margin: 0;
   text-align: center;
 }
