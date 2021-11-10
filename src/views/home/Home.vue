@@ -8,26 +8,18 @@
 </template>
 
 <script>
-import { test } from "../../network/home";
 import NavBar from "../nav/NavBar.vue";
 import Footer from "../../components/common/Footer.vue";
-import News from "./News.vue"
-import Content from "./Content.vue"
+import News from "./News.vue";
+import Content from "./Content.vue";
 export default {
   name: "Home",
-  components: { NavBar, Footer, News,Content},
+  components: { NavBar, Footer, News, Content },
   data() {
     return {
       // 这里放数据
       result: null,
     };
-  },
-  created() {
-    test().then((res) => {
-      console.log(res);
-      //这里赋值数据
-      this.result = res;
-    });
   },
 };
 </script>   
