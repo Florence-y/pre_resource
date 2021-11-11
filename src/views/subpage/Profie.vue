@@ -74,9 +74,17 @@
       <div class="profieHeader">
         <div class="avatar flex space-x-1.5">
           <div class="mb-8 rounded-btn w-24 h-24">
-            <img :src="avatar" />
+            <img :src="this.$imgBaseUrl+user.avatar" />
           </div>
-          <button class="btn">上传头像</button>
+          <div style="position: relative">
+            <button class="btn">上传头像</button>
+            <input
+              type="file"
+              class="opacity-0"
+              style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+              @change="uploadFile"
+            />
+          </div>
         </div>
       </div>
       <div class="profieMainContent flex-row space-y-3">
@@ -87,6 +95,7 @@
               type="text"
               placeholder="info@site.com"
               class="input input-bordered w-2/6"
+              v-model="user.name"
             />
           </label>
         </div>
@@ -97,26 +106,29 @@
               type="text"
               placeholder="info@site.com"
               class="input input-bordered w-2/6"
+              v-model="user.person"
             />
           </label>
         </div>
         <div class="form-control">
           <label class="input-group">
-            <span>用户名</span>
+            <span>学院</span>
             <input
               type="text"
               placeholder="info@site.com"
               class="input input-bordered w-2/6"
+              v-model="user.department"
             />
           </label>
         </div>
         <div class="form-control">
           <label class="input-group">
-            <span>用户名</span>
+            <span>专业</span>
             <input
               type="text"
               placeholder="info@site.com"
               class="input input-bordered w-2/6"
+              v-model="user.major"
             />
           </label>
         </div>
@@ -147,6 +159,10 @@
             </label>
           </div>
         </div>
+        <div class="flex space-x-4">
+          <button class="btn" @click="updateUserInf()">确定</button>
+          <button class="btn btn-primary" @click="clearForm()">清空</button>
+        </div>
       </div>
     </div>
   </div>
@@ -154,13 +170,86 @@
 
 <script>
 import NavBar from "../nav/NavBar.vue";
+import { upload } from "../../network/upload.js";
+import { updateUser } from "../../network/profie.js";
+import { ElMessage } from "element-plus";
+import { isLogin } from "../../network/NavBar";
 export default {
   name: "Profie",
   components: { NavBar },
   data() {
     return {
-      avatar: this.$imgBaseUrl + this.$userInf.avatar,
+      user: {
+        name: "",
+        department: "",
+        major: "",
+        avatar: this.$imgBaseUrl + this.$userInf.avatar,
+        person: "",
+      },
     };
+  },
+  methods: {
+    uploadFile(e) {
+      let formData = new FormData();
+      formData.append("file", e.target.files[0]);
+      upload(formData).then((res) => {
+        let url = res.data;
+        this.user.avatar =url;
+        // this.user.avatar = url;
+      });
+    },
+    clearForm() {
+      console.log("清空");
+      this.user = {
+        name: "",
+        department: "",
+        major: "",
+        avatar: "",
+        person: "",
+      };
+    },
+    updateUserInf() {
+      updateUser(this.user).then(
+        (res) => {
+          console.log(res);
+          let data = res.data;
+          if (res.code === '200000') {
+            this.successMessage(data.message);
+          } else {
+            this.wrongMessage(data.message);
+          }
+        },
+        () => {
+          this.wrongMessage("未知错误");
+        }
+      );
+    },
+    successMessage(message) {
+      ElMessage({
+        showClose: true,
+        message: message,
+        type: "success",
+      });
+    },
+    wrongMessage(message) {
+      ElMessage({
+        showClose: true,
+        message: message,
+        type: "error",
+      });
+    },
+  },
+  beforeCreate() {
+    isLogin().then((res) => {
+      let data = res.data;
+      this.$userInf.avatar = data.data.avatar;
+      this.$userInf.role = data.data.role;
+      this.user.name = data.data.name;
+      this.user.department = data.data.department;
+      this.user.major = data.data.major;
+      this.user.avatar = data.data.avatar;
+      console.log(this.$userInf.avatar);
+    });
   },
 };
 </script>
