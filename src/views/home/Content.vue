@@ -3,14 +3,14 @@
     <div class="item" v-for="item in list" :key="item.id">
       <div class="card lg:card-side bordered">
         <figure>
-          <img src="https://picsum.photos/id/1005/400/250" />
+          <img :src="this.$imgBaseUrl+item.img" />
         </figure>
         <div class="card-body">
           <h2 class="card-title">{{ item.name }}</h2>
           <p>{{ item.description }}</p>
           <div class="card-actions">
             <upload-model></upload-model>
-            <button class="btn btn-ghost">详细信息</button>
+            <label class="btn btn-ghost">数量：{{item.amount}}</label>
           </div>
         </div>
       </div>
