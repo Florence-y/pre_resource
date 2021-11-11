@@ -123,15 +123,22 @@ export default {
       });
     },
     sendResourceRequest() {
-      resourceRequest(this.resourceForm).then((res) => {
-        let data = res.data;
-        console.log(res.data);
-        if (data.code == "200000") {
-          this.successMessage(data.message);
-        } else {
+      resourceRequest(this.resourceForm).then(
+        //成功
+        (res) => {
+          let data = res.data;
+          console.log(res.data);
+          if (data.code == "200000") {
+            this.successMessage(data.message);
+          } else {
+            this.wrongMessage("请检查参数是否填写正确");
+          }
+        },
+        //失败
+        () => {
           this.wrongMessage("请检查参数是否填写正确");
         }
-      });
+      );
     },
     successMessage(message) {
       ElMessage({
