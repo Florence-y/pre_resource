@@ -19,8 +19,6 @@ export default {
   },
   data() {
     return {
-      password:'qq123456',
-      number:'191541227'
     };
   },
 };
