@@ -47,7 +47,9 @@
       </ul>
     </div>
     <div class="flex-1 hidden px-2 mx-2 lg:flex">
-      <a href="http://localhost:8081/home"><span class="text-lg font-bold"> 资源管理系统 </span></a>
+      <a href="http://localhost:8081/home"
+        ><span class="text-lg font-bold"> 资源管理系统 </span></a
+      >
     </div>
     <div class="flex-1 lg:flex-none w-1/5 justify-center">
       <div class="form-control">
@@ -96,7 +98,7 @@
     <div class="flex-none">
       <div class="avatar">
         <div class="rounded-full w-10 h-10 m-1">
-          <img :src="avtarUrl"/>
+          <img :src="avtarUrl" />
         </div>
       </div>
     </div>
@@ -104,6 +106,7 @@
 </template>
 
 <script>
+import { isLogin } from "../../network/NavBar";
 export default {
   name: "NavBar",
   data() {
@@ -112,7 +115,7 @@ export default {
       manger: ["物资申请", "个人信息", "我的申请", "资源管理", "审批管理"],
       root: ["资源管理", "个人信息", "用户管理"],
       roleTag: this.$userInf.role,
-      avtarUrl:this.$imgBaseUrl+this.$userInf.avatar
+      avtarUrl: this.$imgBaseUrl + this.$userInf.avatar,
     };
   },
   methods: {
@@ -133,6 +136,16 @@ export default {
         this.$router.push("/myRequest");
       }
     },
+  },
+  beforeCreate() {
+    isLogin().then((res) => {
+      let data = res.data;
+      this.$userInf.avatar = data.data.avatar;
+      this.$userInf.role = data.data.role;
+      this.roleTag = this.$userInf.role;
+      this.avtarUrl = this.$imgBaseUrl + this.$userInf.avatar;
+      console.log(this.$userInf.avatar);
+    });
   },
 };
 </script>
