@@ -96,7 +96,7 @@
     <div class="flex-none">
       <div class="avatar">
         <div class="rounded-full w-10 h-10 m-1">
-          <img src="https://i.pravatar.cc/500?img=32" />
+          <img :src="avtarUrl"/>
         </div>
       </div>
     </div>
@@ -111,7 +111,8 @@ export default {
       viewer: ["物资申请", "个人信息", "我的申请"],
       manger: ["物资申请", "个人信息", "我的申请", "资源管理", "审批管理"],
       root: ["资源管理", "个人信息", "用户管理"],
-      roleTag: 1,
+      roleTag: this.$userInf.role,
+      avtarUrl:this.$imgBaseUrl+this.$userInf.avatar
     };
   },
   methods: {

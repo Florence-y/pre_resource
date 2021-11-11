@@ -1,4 +1,6 @@
-import { createApp } from 'vue'
+import {
+    createApp
+} from 'vue'
 import App from './App.vue'
 import router from './router'
 import './index.css'
@@ -11,5 +13,7 @@ AppVue.use(router).use(ElementPlus).mount('#app')
 
 AppVue.config.globalProperties.$userInf = {
     number: null,
-    name: null
+    avatar: null,
+        role: null,
 };
+AppVue.config.globalProperties.$imgBaseUrl = "http://localhost:8080/static/"
