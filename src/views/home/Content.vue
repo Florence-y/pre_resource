@@ -9,7 +9,7 @@
           <h2 class="card-title">{{ item.name }}</h2>
           <p>{{ item.description }}</p>
           <div class="card-actions">
-            <upload-model></upload-model>
+            <upload-model :resourceId="item.id"></upload-model>
             <label class="btn btn-ghost">数量：{{item.amount}}</label>
           </div>
         </div>

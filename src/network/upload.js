@@ -12,3 +12,10 @@ export function upload(data) {
         data: data
     })
 }
+export function resourceRequest(data) {
+    return request({
+        url: '/resourceChange/add',
+        method: 'POST',
+        data: data
+    })
+}

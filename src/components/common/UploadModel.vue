@@ -12,6 +12,7 @@
           type="text"
           placeholder="请输入数量"
           class="input input-bordered"
+          v-model="resourceForm.changeAmount"
         />
       </div>
       <!--证明说明-->
@@ -22,6 +23,7 @@
         <textarea
           class="textarea h-24 textarea-bordered"
           placeholder="请输入资源申请原因与去处"
+          v-model="resourceForm.description"
         ></textarea>
       </div>
       <!-- 文件上传 -->
@@ -78,7 +80,12 @@
         </div>
       </div>
       <div class="modal-action">
-        <label for="my-modal-2" class="btn btn-primary">确定</label>
+        <label
+          for="my-modal-2"
+          class="btn btn-primary"
+          @click="sendResourceRequest"
+          >确定</label
+        >
         <label for="my-modal-2" class="btn">取消</label>
       </div>
     </div>
@@ -87,24 +94,58 @@
 
 <script>
 import { upload } from "../../network/upload.js";
-
+import { resourceRequest } from "../../network/upload.js";
+import { ElMessage } from "element-plus";
 export default {
   name: "UploadModel",
   components: {},
+  props: {
+    resourceId: Number,
+  },
   data() {
     return {
-        fileUrl:""
+      resourceForm: {
+        img: "",
+        changeAmount: "",
+        description: "",
+        resourceId: this.resourceId,
+      },
     };
   },
   methods: {
     uploadFile(e) {
       let formData = new FormData();
       formData.append("file", e.target.files[0]);
-      upload(formData).then((res)=>{
+      upload(formData).then((res) => {
+        let url = res.data;
+        console.log(url);
+        this.resourceForm.img = url;
+      });
+    },
+    sendResourceRequest() {
+      resourceRequest(this.resourceForm).then((res) => {
         let data = res.data;
-        console.log(data.fileUrl);
-        this.fileUrl= data.fileUrl;
-      })
+        console.log(res.data);
+        if (data.code == "200000") {
+          this.successMessage(data.message);
+        } else {
+          this.wrongMessage("请检查参数是否填写正确");
+        }
+      });
+    },
+    successMessage(message) {
+      ElMessage({
+        showClose: true,
+        message: message,
+        type: "success",
+      });
+    },
+    wrongMessage(message) {
+      ElMessage({
+        showClose: true,
+        message: message,
+        type: "error",
+      });
     },
   },
 };
