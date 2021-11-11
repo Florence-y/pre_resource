@@ -3,7 +3,7 @@
     <div class="item" v-for="item in list" :key="item.id">
       <div class="card lg:card-side bordered">
         <figure>
-          <img :src="this.$imgBaseUrl+item.img" />
+          <img :src="this.$imgBaseUrl+item.img" style="weight:200px;height:200px"/>
         </figure>
         <div class="card-body">
           <h2 class="card-title">{{ item.name }}</h2>
