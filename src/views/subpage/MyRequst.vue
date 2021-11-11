@@ -91,7 +91,7 @@ export default {
   components: { NavBar },
   data() {
     return {
-      curStatus:1,
+      curStatus: 1,
       dataListHeader: [],
       dataList: [
         { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
@@ -129,27 +129,27 @@ export default {
         { id: 0, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 0, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 0, name1: "abc", name2: "abc", localtion: "abc" },
-      ]
+      ];
     },
     getReimbursementRequestList() {
       this.curStatus = 1;
-            this.dataList = [
+      this.dataList = [
         { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-      ]
+      ];
     },
     getClassRequestList() {
       this.curStatus = 2;
-            this.dataList = [
+      this.dataList = [
         { id: 2, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 2, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 2, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 2, name1: "abc", name2: "abc", localtion: "abc" },
         { id: 2, name1: "abc", name2: "abc", localtion: "abc" },
-      ]
+      ];
     },
   },
 };

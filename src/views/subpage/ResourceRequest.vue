@@ -13,17 +13,19 @@
         rounded-box
       "
     >
-      <li>
+      <li
+        @click="getResourceByType(0)"
+        @mouseover="changeInStatus($event)"
+        @mouseleave="changeOutStatus($event)"
+      >
         <a> 教务处 </a>
       </li>
-      <li class="bordered">
+      <li
+        @click="getResourceByType(1)"
+        @mouseover="changeInStatus($event)"
+        @mouseleave="changeOutStatus($event)"
+      >
         <a> 财务处 </a>
-      </li>
-      <li>
-        <span> With a span </span>
-      </li>
-      <li>
-        <a> With icon </a>
       </li>
     </ul>
   </div>
@@ -38,7 +40,7 @@
           <th>申请</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-infinite-scroll="load">
         <tr
           @mouseenter="active($event)"
           @mouseleave="noActive($event)"
@@ -51,41 +53,7 @@
           <td>{{ resource.description }}</td>
           <!-- 模态框 -->
           <td>
-            <label for="my-modal-2" class="btn btn-primary modal-button"
-              >申请</label
-            >
-            <input type="checkbox" id="my-modal-2" class="modal-toggle" />
-            <div class="modal">
-              <div class="modal-box">
-                <!-- 数量 -->
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">数量</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="请输入数量"
-                    class="input input-bordered"
-                  />
-                </div>
-                <!--证明说明-->
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">资源申请原因与去处</span>
-                  </label>
-                  <textarea
-                    class="textarea h-24 textarea-bordered"
-                    placeholder="请输入资源申请原因与去处"
-                  ></textarea>
-                </div>
-                <!-- 文件上传 -->
-                <upload></upload>
-                <div class="modal-action">
-                  <label for="my-modal-2" class="btn btn-primary">确定</label>
-                  <label for="my-modal-2" class="btn">取消</label>
-                </div>
-              </div>
-            </div>
+            <upload-model :resourceId="resource.id"></upload-model>
           </td>
         </tr>
       </tbody>
@@ -95,26 +63,53 @@
 
 <script>
 import NavBar from "../nav/NavBar.vue";
-import Upload from "../../components/common/Upload.vue"
-
-
+import UploadModel from "../../components/common/UploadModel.vue";
+import { getResourceByCondition } from "../../network/ResourceRequest";
 export default {
   name: "resource",
-  components: { NavBar,Upload},
+  components: { NavBar, UploadModel },
   data() {
     return {
+      current: 1,
+      size: 3,
+      type: 0,
       resources: [
-        { name: "铅笔", amount: 100, description: "铅笔好用呀！！" },
-        { name: "铅笔", amount: 100, description: "铅笔好用呀！！" },
-        { name: "铅笔", amount: 100, description: "铅笔好用呀！！" },
       ],
     };
   },
   methods: {
+    getResourceByType(type) {
+      getResourceByCondition({
+        type,
+        current: 1,
+        size: 3,
+      }).then((res) => {
+        let data = res.data;
+        this.resources = data.records;
+      });
+      this.type = type;
+      this.current = 1;
+    },
+    load() {
+      getResourceByCondition({
+        current: this.current,
+        size: this.size,
+        type: this.type,
+      }).then((res) => {
+        this.resources = this.resources.concat(res.data.records);
+        this.current += 1;
+      });
+    },
     active($event) {
       $event.currentTarget.className = "active";
     },
     noActive($event) {
+      $event.currentTarget.className = "";
+    },
+    changeInStatus($event) {
+      $event.currentTarget.className = "bordered";
+    },
+    changeOutStatus($event) {
       $event.currentTarget.className = "";
     },
   },

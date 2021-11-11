@@ -1,11 +1,10 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <div id="app">
-
-      <router-view></router-view>
-      <!-- <welcome></welcome> -->
-    </div>
+  <div id="app">
+    <router-view></router-view>
+    <!-- <welcome></welcome> -->
+  </div>
 </template>
 
 <script>
@@ -18,12 +17,13 @@ export default {
     // HelloWorld
     // welcome,
   },
-  setup() {
-    
+  data() {
+    return {
+    };
   },
 };
 </script>
-
+  
 <style>
 @import "./assets/css/base.css";
 /* #app {
