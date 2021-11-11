@@ -36,7 +36,10 @@
         <tr>
           <th>资源名</th>
           <th>数量</th>
+          <th>图片</th>
           <th>描述</th>
+          <th>资源开放时间</th>
+          <th>资源关闭时间</th>
           <th>申请</th>
         </tr>
       </thead>
@@ -48,9 +51,21 @@
           v-for="resource in resources"
           :key="resource"
         >
-          <th>{{ resource.name }}</th>
+          <td>{{ resource.name }}</td>
+
           <td>{{ resource.amount }}</td>
+          <td>
+            <div
+              class="asd"
+              :style="{
+                backgroundImage: 'url(' + this.$imgBaseUrl + resource.img + ')',
+                backgroundColor: '#f00',
+              }"
+            ></div>
+          </td>
           <td>{{ resource.description }}</td>
+          <td>{{ resource.effectStartTime }}</td>
+          <td>{{ resource.effectEndTime }}</td>
           <!-- 模态框 -->
           <td>
             <upload-model :resourceId="resource.id"></upload-model>
@@ -73,8 +88,7 @@ export default {
       current: 1,
       size: 3,
       type: 0,
-      resources: [
-      ],
+      resources: [],
     };
   },
   methods: {
@@ -96,6 +110,7 @@ export default {
         size: this.size,
         type: this.type,
       }).then((res) => {
+        console.log(res.data.records);
         this.resources = this.resources.concat(res.data.records);
         this.current += 1;
       });
@@ -117,4 +132,10 @@ export default {
 </script>
 
 <style>
+.asd {
+  width: 100%;
+  height:20px;
+  background-position: center center;
+  background-size: 100%;
+}
 </style>

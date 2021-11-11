@@ -30,7 +30,7 @@
       <div class="flex justify-center mt-8">
         <div class="max-w-2xl rounded-lg shadow-xl bg-gray-50">
           <div class="m-4">
-            <label class="inline-block mb-2 text-gray-500">File Upload</label>
+            <label class="inline-block mb-2 text-gray-500">上传相关证明</label>
             <div class="flex items-center justify-center w-full">
               <label
                 class="
@@ -118,7 +118,6 @@ export default {
       formData.append("file", e.target.files[0]);
       upload(formData).then((res) => {
         let url = res.data;
-        console.log(url);
         this.resourceForm.img = url;
       });
     },

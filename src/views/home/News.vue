@@ -2,7 +2,8 @@
   <el-carousel indicator-position="outside">
     <el-carousel-item v-for="item in imgsAndRef" :key="item">
       <a :href="item.url">
-        <img :src="require('../../assets/img/'+item.img)" />
+        <!-- <img :src="require('../../assets/img/'+item.img)" /> -->
+        <div class="asd" :style="{backgroundImage: 'url('+ require('../../assets/img/'+item.img) +')', backgroundColor: '#f00'  }"></div>
       </a>
     </el-carousel-item>
   </el-carousel>
@@ -24,11 +25,11 @@ export default {
 </script>
 
 <style scoped>
-.el-carousel__item h3 {
+.el-carousel__item{
   color: #475669;
   font-size: 18px;
   opacity: 0.75;
-  line-height: 500px;
+  line-height: 600px;
   margin: 0;
   text-align: center;
 }
@@ -39,5 +40,12 @@ export default {
 
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
+}
+
+.asd {
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-size: 100%;
 }
 </style>
