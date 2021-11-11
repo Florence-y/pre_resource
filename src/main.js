@@ -8,3 +8,8 @@ import 'element-plus/dist/index.css'
 
 const AppVue = createApp(App)
 AppVue.use(router).use(ElementPlus).mount('#app')
+
+AppVue.config.globalProperties.$userInf = {
+    number: null,
+    name: null
+};

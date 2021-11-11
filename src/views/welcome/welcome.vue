@@ -90,6 +90,7 @@ export default {
       login(this.loginForm).then((res) => {
         let data = res.data;
         if (data.code == "200000") {
+          this.$userInf.number = this.loginForm.number;
           this.$router.push("/home");
         } else {
           this.loginStatus = 1;
