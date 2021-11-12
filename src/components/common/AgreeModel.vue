@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { updateResourceChange } from "../../network/ExamineManage";
 export default {
   name: "AgreeModel",
   data() {
@@ -36,7 +37,11 @@ export default {
   },
   methods: {
     disagree() {
-      console.log(this.id,this.statusDescription);
+      updateResourceChange({
+        id: this.id,
+        statusDescription: this.statusDescription,
+        status: 2,
+      });
     },
   },
 };

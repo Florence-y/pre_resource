@@ -17,3 +17,19 @@ export function listReimbursementRequestRecordsByCondition(data) {
         params: data,
     })
 }
+
+export function updateResourceChange(data) {
+    return request({
+        url: '/resourceChange/update',
+        method: 'post',
+        data: data,
+    })
+}
+
+export function updateReimbursement(data) {
+    return request({
+        url: '/reimbursement/update',
+        method: 'POST',
+        data: data,
+    })
+}

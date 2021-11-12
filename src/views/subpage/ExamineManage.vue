@@ -106,7 +106,11 @@
               {{ item.statusDescription ? item.statusDescription : "无" }}
             </td>
             <td v-if="item.status == 0" class="flex justify-center space-x-2">
-              <label class="btn btn-primary">同意</label>
+              <label
+                class="btn btn-primary"
+                @click="agreeResourceChange(item.id)"
+                >同意</label
+              >
               <agree-model :id="item.id"></agree-model>
             </td>
             <td v-if="item.status != 0">已操作</td>
@@ -157,8 +161,15 @@
               </select>
             </td>
             <td v-if="item.status == 0" class="flex justify-center space-x-2">
-              <label class="btn btn-primary">同意</label
-              ><label class="btn btn-primary">拒绝</label>
+              <label
+                class="btn btn-primary"
+                @click="agreeReimbursement(item.id)"
+                >同意</label
+              ><label
+                class="btn btn-primary"
+                @click="refuseReimbursement(item.id)"
+                >拒绝</label
+              >
             </td>
             <td v-if="item.status != 0">已操作</td>
           </tr>
@@ -178,9 +189,12 @@
 import NavBar from "../nav/NavBar.vue";
 import ExamineMenu from "../menu/ExamineMenu.vue";
 import AgreeModel from "../../components/common/AgreeModel.vue";
+import { ElMessage } from "element-plus";
 import {
   listResourceRequestRecordsByCondition,
   listReimbursementRequestRecordsByCondition,
+  updateReimbursement,
+  updateResourceChange,
 } from "../../network/ExamineManage";
 export default {
   name: "ExamineManage",
@@ -196,6 +210,58 @@ export default {
   components: { NavBar, ExamineMenu, AgreeModel },
   // components: { NavBar, ExamineMenu,},
   methods: {
+    agreeReimbursement(id) {
+      updateReimbursement({
+        id,
+        status: 1,
+      }).then((res) => {
+        let data = res.data;
+        if (data.code === "200000") {
+          this.successMessage(data.message);
+        } else {
+          this.wrongMessage(data.message);
+        }
+      });
+    },
+    agreeResourceChange(id) {
+      updateResourceChange({
+        id,
+        status: 1,
+      }).then((res) => {
+        let data = res.data;
+        if (data.code === "200000") {
+          this.successMessage(data.message);
+        } else {
+          this.wrongMessage(data.message);
+        }
+      });
+    },
+    refuseReimbursement(id) {
+      updateReimbursement({
+        id,
+        status: 2,
+      }).then((res) => {
+        let data = res.data;
+        if (data.code === "200000") {
+          this.successMessage(data.message);
+        } else {
+          this.wrongMessage(data.message);
+        }
+      });
+    },
+    refuseResourceChange(id) {
+      updateResourceChange({
+        id,
+        status: 2,
+      }).then((res) => {
+        let data = res.data;
+        if (data.code === "200000") {
+          this.successMessage(data.message);
+        } else {
+          this.wrongMessage(data.message);
+        }
+      });
+    },
     getResourceByType(type) {
       this.curStatus = type;
       this.current = 1;
@@ -219,10 +285,10 @@ export default {
           this.dataList = data.records;
         });
       }
-      console.log(type);
     },
     updateStatus(status) {
       this.status = status;
+      this.current=1;
       let type = this.curStatus;
       let query = {
         current: this.current,
@@ -291,6 +357,20 @@ export default {
           this.dataList = data.records;
         });
       }
+    },
+    successMessage(message) {
+      ElMessage({
+        showClose: true,
+        message: message,
+        type: "success",
+      });
+    },
+    wrongMessage(message) {
+      ElMessage({
+        showClose: true,
+        message: message,
+        type: "error",
+      });
     },
   },
   created() {
