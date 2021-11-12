@@ -32,54 +32,88 @@
     <examine-menu></examine-menu>
     <div class="overflow-x-auto">
       <table class="table w-full">
-        <thead>
+        <thead v-if="curStatus === 0">
           <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
-            <th>是否同意</th>
+            <th>序号</th>
+            <th>申请人学号</th>
+            <th>资源名</th>
+            <th>数量</th>
+            <th>申请原因及去向</th>
+            <th>申请时间</th>
+            <th>证明图片</th>
+            <th>审核状态</th>
+            <th>审核人回复</th>
           </tr>
         </thead>
-        <tbody>
+        <thead v-if="curStatus === 1">
           <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
+            <th>序号</th>
+            <th>申请人学号</th>
+            <th>报销类型</th>
+            <th>报销事件</th>
+            <th>支付的方式</th>
+            <th>支付的具体细节</th>
+            <th>证明图片</th>
+            <th>申请时间</th>
+            <th>审核状态</th>
+          </tr>
+        </thead>
+        <tbody v-if="curStatus === 0" class="myRequestResource">
+          <tr v-for="item in dataList" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.userNumber }}</td>
+            <td>{{ item.resourceName }}</td>
+            <td>{{ item.changeAmount }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.operateTime }}</td>
             <td>
-              <button class="btn btn-success">同意</button>
-              <button class="btn btn-error">拒绝</button>
+              <div
+                class="myRequestImg"
+                :style="{
+                  backgroundImage: 'url(' + this.$imgBaseUrl + item.img + ')',
+                }"
+              ></div>
+            </td>
+            <td>
+              {{
+                item.status == 0
+                  ? "待审核"
+                  : item.status == 1
+                  ? "已审核"
+                  : "已拒绝"
+              }}
+            </td>
+            <td>
+              {{ item.statusDescription ? item.statusDescription : "无" }}
             </td>
           </tr>
-          <tr>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
+        </tbody>
+        <tbody v-if="curStatus === 1" class="myRequestReimbursement">
+          <tr v-for="item in dataList" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.userNumber }}</td>
+            <td>{{ item.reimbursementType == 0 ? "个人报销" : "团体报销" }}</td>
+            <td>{{ item.event }}</td>
+            <td>{{ item.payWay == 0 ? "微信支付" : "支付宝" }}</td>
+            <td>{{ item.payDetail }}</td>
             <td>
-              <button class="btn btn-success">同意</button>
-              <button class="btn btn-error">拒绝</button>
+              <div
+                class="myRequestImg"
+                :style="{
+                  backgroundImage:
+                    'url(' + this.$imgBaseUrl + item.proveDetail + ')',
+                }"
+              ></div>
             </td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
+            <td>{{ item.eventStartTime }}</td>
             <td>
-              <button class="btn btn-success">同意</button>
-              <button class="btn btn-error">拒绝</button>
-            </td>
-          </tr>
-          <tr>
-            <th>4</th>
-            <td>Marjy Ferencz</td>
-            <td>Office Assistant I</td>
-            <td>Crimson</td>
-            <td>
-              <button class="btn btn-success">同意</button>
-              <button class="btn btn-error">拒绝</button>
+              {{
+                item.status == 0
+                  ? "待审核"
+                  : item.status == 1
+                  ? "已审核"
+                  : "已拒绝"
+              }}
             </td>
           </tr>
         </tbody>
@@ -109,6 +143,7 @@ export default {
       status: 0,
       current: 1,
       size: 4,
+      dataList: [],
     };
   },
   components: { NavBar, ExamineMenu },
@@ -126,12 +161,14 @@ export default {
         listResourceRequestRecordsByCondition(query).then((res) => {
           let data = res.data;
           console.log(data);
+          this.dataList = data.records;
         });
       }
       if (type === 1) {
         listReimbursementRequestRecordsByCondition(query).then((res) => {
           let data = res.data;
           console.log(data);
+          this.dataList = data.records;
         });
       }
       console.log(type);
@@ -153,18 +190,18 @@ export default {
       if (this.curStatus === 0) {
         listResourceRequestRecordsByCondition(query).then((res) => {
           let data = res.data;
-          console.log(data);
+          this.dataList = data.records;
         });
       }
       if (this.curStatus === 1) {
         listReimbursementRequestRecordsByCondition(query).then((res) => {
           let data = res.data;
-          console.log(data);
+          this.dataList = data.records;
         });
       }
     },
     next() {
-      let current = this.current+1;
+      let current = this.current + 1;
       this.current = current;
       let query = {
         current,
@@ -174,19 +211,28 @@ export default {
       if (this.curStatus === 0) {
         listResourceRequestRecordsByCondition(query).then((res) => {
           let data = res.data;
-          console.log(data);
+          this.dataList = data.records;
         });
       }
       if (this.curStatus === 1) {
         listReimbursementRequestRecordsByCondition(query).then((res) => {
           let data = res.data;
-          console.log(data);
+          this.dataList = data.records;
         });
       }
     },
   },
+  created(){
+   this.getResourceByType(0)
+  }
 };
 </script>
 
 <style>
+.myRequestImg {
+  width: 100%;
+  height: 60px;
+  background-position: center center;
+  background-size: 100%;
+}
 </style>

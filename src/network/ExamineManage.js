@@ -4,7 +4,7 @@ import {
 
 export function listResourceRequestRecordsByCondition(data) {
     return request({
-        url: '/resourceChange/list',
+        url: '/resourceChange/listToExamine',
         method: 'get',
         params: data,
     })
@@ -12,7 +12,7 @@ export function listResourceRequestRecordsByCondition(data) {
 
 export function listReimbursementRequestRecordsByCondition(data) {
     return request({
-        url: '/resourceChange/list',
+        url: '/reimbursement/list',
         method: 'get',
         params: data,
     })
