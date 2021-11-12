@@ -5,15 +5,13 @@ import {
 export function test() {
     return request({
         url: '/test'
-        })
-        }
+    })
+    }
 
-
-
-        export function loadResourceList(Page) {
-            return request({
-                        url: '/resource/list',
-                        method: 'GET',
-                        params: Page
+export function loadResourceList(Page) {
+    return request({
+                url: '/resource/list',
+                method: 'GET',
+                params: Page
     })
 }
