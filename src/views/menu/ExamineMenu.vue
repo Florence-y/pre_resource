@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    default-active="2"
+    default-active="1"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
     @open="handleOpen"
@@ -8,15 +8,15 @@
     @mouseenter="isCollapse = false"
     @mouseleave="isCollapse = true"
   >
-    <el-menu-item index="1">
+    <el-menu-item index="1" @click="changeStatus(0)">
       <el-icon><list /></el-icon>
       <template #title> 审批中 </template>
     </el-menu-item>
-    <el-menu-item index="2">
+    <el-menu-item index="2" @click="changeStatus(1)">
       <el-icon><check /></el-icon>
       <template #title>已同意</template>
     </el-menu-item>
-    <el-menu-item index="3">
+    <el-menu-item index="3" @click="changeStatus(2)">
       <el-icon><close /></el-icon>
       <template #title>已拒绝</template>
     </el-menu-item>
@@ -34,13 +34,16 @@ export default defineComponent({
     Close,
     List,
   },
+  methods:{
+    changeStatus(status){
+      this.$emit('changeStatus',status)
+    }
+  },
   setup() {
     const isCollapse = ref(true);
-    const handleOpen = (key, keyPath) => {
-      console.log(key, keyPath);
+    const handleOpen = () => {
     };
-    const handleClose = (key, keyPath) => {
-      console.log(key, keyPath);
+    const handleClose = () => {
     };
     return {
       isCollapse,

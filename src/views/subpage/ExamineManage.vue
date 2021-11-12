@@ -29,7 +29,7 @@
     </ul>
   </div>
   <div class="container flex justify-center space-x-4">
-    <examine-menu></examine-menu>
+    <examine-menu @changeStatus="updateStatus"></examine-menu>
     <div class="overflow-x-auto">
       <table class="table w-full">
         <thead v-if="curStatus === 0">
@@ -173,6 +173,29 @@ export default {
       }
       console.log(type);
     },
+    updateStatus(status) {
+      this.status = status;
+      let type = this.curStatus;
+      let query = {
+        current: this.current,
+        size: this.size,
+        status: this.status,
+      };
+      if (type === 0) {
+        listResourceRequestRecordsByCondition(query).then((res) => {
+          let data = res.data;
+          console.log(data);
+          this.dataList = data.records;
+        });
+      }
+      if (type === 1) {
+        listReimbursementRequestRecordsByCondition(query).then((res) => {
+          let data = res.data;
+          console.log(data);
+          this.dataList = data.records;
+        });
+      }
+    },
     changeInStatus($event) {
       $event.currentTarget.className = "bordered";
     },
@@ -222,9 +245,9 @@ export default {
       }
     },
   },
-  created(){
-   this.getResourceByType(0)
-  }
+  created() {
+    this.getResourceByType(0);
+  },
 };
 </script>
 
