@@ -126,7 +126,7 @@ export default {
     onSubmit() {
       console.log(this.form);
       saveReimbursement(this.form).then((res)=>{
-        let data = res; 
+        let data = res.data; 
         if(data.code==="200000"){
             this.successMessage(data.message);
         }else{
