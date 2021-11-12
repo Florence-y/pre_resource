@@ -120,7 +120,7 @@
             <td>{{ item.userNumber }}</td>
             <td>{{ item.reimbursementType == 0 ? "个人报销" : "团体报销" }}</td>
             <td>{{ item.event }}</td>
-            <td>{{ item.payWay == 0 ? "支付宝" : "微信支付" }}</td>
+            <td>{{ item.payWay == 0 ? "微信支付" : "支付宝" }}</td>
             <td>{{ item.payDetail }}</td>
             <td>
               <div
@@ -164,8 +164,9 @@
 
 <script>
 import NavBar from "../nav/NavBar.vue";
-import { listResourceRequestRecords } from "../../network/MyRequest";
+import { listResourceRequestRecords} from "../../network/MyRequest";
 import ReimbursementUploadModel from "../../components/common/ReimbursementUploadModel.vue";
+
 export default {
   name: "MyRequest",
   components: { NavBar, ReimbursementUploadModel },

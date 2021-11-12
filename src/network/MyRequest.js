@@ -10,3 +10,10 @@ export function listResourceRequestRecords(data) {
         params: data,
     })
 }
+export function listReimbursementRequestRecords(data) {
+    return request({
+        url: '/reimbursement/list',
+        method: 'get',
+        params: data,
+    })
+}

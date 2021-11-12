@@ -92,7 +92,7 @@
         <label
           for="my-modal-2"
           class="btn btn-primary"
-          @click="submit"
+          @click="onSubmit()"
           >确定</label
         >
         <label for="my-modal-2" class="btn">取消</label>
@@ -104,6 +104,7 @@
 <script>
 import { upload } from "../../network/upload.js";
 import { ElMessage } from "element-plus";
+import {saveReimbursement} from "../../network/ReimbursementUploadModel";
 export default {
   name: "ReimbursementUploadModel",
   components: {},
@@ -123,7 +124,8 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("submit!");
+      console.log(this.form);
+      saveReimbursement(this.form)
     },
     uploadFile(e) {
       let formData = new FormData();
