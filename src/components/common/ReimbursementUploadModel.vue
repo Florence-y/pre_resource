@@ -1,5 +1,5 @@
 <template>
-  <label for="my-modal-2" class="btn btn-primary modal-button">申请资源</label>
+  <label for="my-modal-2" class="btn btn-primary modal-button">报销申请</label>
   <input type="checkbox" id="my-modal-2" class="modal-toggle" />
   <div class="modal">
     <div class="modal-box">
@@ -97,7 +97,7 @@ import { upload } from "../../network/upload.js";
 import { resourceRequest } from "../../network/upload.js";
 import { ElMessage } from "element-plus";
 export default {
-  name: "UploadModel",
+  name: "ReimbursementUploadModel",
   components: {},
   props: {
     resourceId: Number,
@@ -108,7 +108,6 @@ export default {
         img: "",
         changeAmount: "",
         description: "",
-        resourceId: this.resourceId,
       },
     };
   },
