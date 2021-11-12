@@ -64,7 +64,14 @@
             <td>{{ item.changeAmount }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.operateTime }}</td>
-            <td>{{ item.img }}</td>
+            <td>
+              <div
+                class="myRequestImg"
+                :style="{
+                  backgroundImage: 'url(' + this.$imgBaseUrl + item.img + ')',
+                }"
+              ></div>
+            </td>
             <td>
               {{
                 item.status == 0
@@ -99,8 +106,10 @@
     </div>
   </div>
   <div class="btn-group flex justify-center">
-    <button class="btn btn-outline btn-wide">Previous Page</button>
-    <button class="btn btn-outline btn-wide">Next Page</button>
+    <button class="btn btn-outline btn-wide" @click="last()">
+      Previous Page
+    </button>
+    <button class="btn btn-outline btn-wide" @click="next()">Next Page</button>
   </div>
 </template>
 
@@ -112,7 +121,8 @@ export default {
   components: { NavBar },
   data() {
     return {
-      curStatus: 1,
+      curStatus: 0,
+      current: 1,
       dataListHeader: [],
       dataList: [
         { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
@@ -173,10 +183,42 @@ export default {
         { id: 2, name1: "abc", name2: "abc", localtion: "abc" },
       ];
     },
+    next() {
+      let status = this.curStatus;
+      let current = this.current + 1;
+      if (status == 0) {
+        listResourceRequestRecords({
+          current,
+          size: 3,
+        }).then((res) => {
+          let data = res.data;
+          this.dataList = data.records;
+        });
+      }
+    },
+    last() {
+      let status = this.curStatus;
+      let current = this.current - 1 < 0 ? 1 : this.current - 1;
+      if (status == 0) {
+        listResourceRequestRecords({
+          current,
+          size: 3,
+        }).then((res) => {
+          let data = res.data;
+          this.dataList = data.records;
+        });
+      }
+    },
   },
   created() {},
 };
-</script>
+</script >
 
-<style>
+<style scoped>
+.myRequestImg {
+  width: 100%;
+  height: 60px;
+  background-position: center center;
+  background-size: 100%;
+}
 </style>
