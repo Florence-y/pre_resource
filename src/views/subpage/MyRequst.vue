@@ -164,7 +164,10 @@
 
 <script>
 import NavBar from "../nav/NavBar.vue";
-import { listResourceRequestRecords} from "../../network/MyRequest";
+import {
+  listResourceRequestRecords,
+  listReimbursementRequestRecords,
+} from "../../network/MyRequest";
 import ReimbursementUploadModel from "../../components/common/ReimbursementUploadModel.vue";
 
 export default {
@@ -175,7 +178,6 @@ export default {
       curStatus: 0,
       current: 1,
       dataListHeader: [],
-      text: "申请资源",
       dataList: [],
     };
   },
@@ -200,26 +202,24 @@ export default {
     },
     getResourceRequestList() {
       this.curStatus = 0;
-      this.text = "申请资源";
       listResourceRequestRecords({
         current: 1,
         size: 3,
       }).then((res) => {
         let data = res.data;
         this.dataList = data.records;
-        console.log(data.records);
       });
     },
     getReimbursementRequestList() {
       this.curStatus = 1;
-      this.text = "报销申请";
-      this.dataList = [
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-      ];
+      listReimbursementRequestRecords({
+        current: 1,
+        size: 3,
+      }).then((res) => {
+        let data = res.data;
+        console.log(res);
+        this.dataList = data.records;
+      });
     },
     getClassRequestList() {
       this.curStatus = 2;
@@ -244,12 +244,30 @@ export default {
           this.dataList = data.records;
         });
       }
+      if (status == 1) {
+        listReimbursementRequestRecords({
+          current,
+          size: 3,
+        }).then((res) => {
+          let data = res.data;
+          this.dataList = data.records;
+        });
+      }
     },
     last() {
       let status = this.curStatus;
       let current = this.current - 1 < 0 ? 1 : this.current - 1;
       if (status == 0) {
         listResourceRequestRecords({
+          current,
+          size: 3,
+        }).then((res) => {
+          let data = res.data;
+          this.dataList = data.records;
+        });
+      }
+      if (status == 1) {
+        listReimbursementRequestRecords({
           current,
           size: 3,
         }).then((res) => {
