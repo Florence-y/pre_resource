@@ -3,34 +3,43 @@
   <input type="checkbox" id="my-modal-2" class="modal-toggle" />
   <div class="modal">
     <div class="modal-box">
-      <!-- 数量 -->
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">数量</span>
-        </label>
-        <input
-          type="text"
-          placeholder="请输入数量"
-          class="input input-bordered"
-          v-model="resourceForm.changeAmount"
-        />
-      </div>
-      <!--证明说明-->
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">资源申请原因与去处</span>
-        </label>
-        <textarea
-          class="textarea h-24 textarea-bordered"
-          placeholder="请输入资源申请原因与去处"
-          v-model="resourceForm.description"
-        ></textarea>
-      </div>
+      <el-form ref="form" :model="form" label-width="120px">
+        <el-form-item label="报销类型">
+          <el-select
+            v-model="form.reimbursementType"
+            placeholder="请选择报销类型"
+          >
+            <el-option label="个人报销" value="0"></el-option>
+            <el-option label="团体报销" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="收款方式">
+          <el-select v-model="form.payWay" placeholder="请选择你的收款方式">
+            <el-option label="微信支付" value="0"></el-option>
+            <el-option label="支付宝" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="收款具体账号">
+          <el-input
+            v-model="form.payDetail"
+            placeholder="请输入你的微信号或者支付宝账号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="报销事项描述">
+          <el-input
+            v-model="form.event"
+            type="textarea"
+            placeholder="请输入你报销的具体事件"
+          ></el-input>
+        </el-form-item>
+      </el-form>
       <!-- 文件上传 -->
       <div class="flex justify-center mt-8">
         <div class="max-w-2xl rounded-lg shadow-xl bg-gray-50">
           <div class="m-4">
-            <label class="inline-block mb-2 text-gray-500">上传相关证明</label>
+            <label class="inline-block mb-2 text-gray-500"
+              >上传相关证明(报销金额由证明材料决定)</label
+            >
             <div class="flex items-center justify-center w-full">
               <label
                 class="
@@ -79,11 +88,11 @@
           </div>
         </div>
       </div>
-      <div class="modal-action">
+      <div class="modal-action flex justify-center">
         <label
           for="my-modal-2"
           class="btn btn-primary"
-          @click="sendResourceRequest"
+          @click="submit"
           >确定</label
         >
         <label for="my-modal-2" class="btn">取消</label>
@@ -94,7 +103,6 @@
 
 <script>
 import { upload } from "../../network/upload.js";
-import { resourceRequest } from "../../network/upload.js";
 import { ElMessage } from "element-plus";
 export default {
   name: "ReimbursementUploadModel",
@@ -104,39 +112,26 @@ export default {
   },
   data() {
     return {
-      resourceForm: {
-        img: "",
-        changeAmount: "",
-        description: "",
+      form: {
+        reimbursementType: "",
+        payWay: "",
+        event:"",
+        payDetail:"",
+        proveDetail:""
       },
     };
   },
   methods: {
+    onSubmit() {
+      console.log("submit!");
+    },
     uploadFile(e) {
       let formData = new FormData();
       formData.append("file", e.target.files[0]);
       upload(formData).then((res) => {
         let url = res.data;
-        this.resourceForm.img = url;
+        this.form.proveDetail = url;
       });
-    },
-    sendResourceRequest() {
-      resourceRequest(this.resourceForm).then(
-        //成功
-        (res) => {
-          let data = res.data;
-          console.log(res.data);
-          if (data.code == "200000") {
-            this.successMessage(data.message);
-          } else {
-            this.wrongMessage("请检查参数是否填写正确");
-          }
-        },
-        //失败
-        () => {
-          this.wrongMessage("请检查参数是否填写正确");
-        }
-      );
     },
     successMessage(message) {
       ElMessage({

@@ -175,13 +175,7 @@ export default {
       current: 1,
       dataListHeader: [],
       text: "申请资源",
-      dataList: [
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 1, name1: "abc", name2: "abc", localtion: "abc" },
-      ],
+      dataList: [],
     };
   },
   methods: {
