@@ -125,7 +125,14 @@ export default {
   methods: {
     onSubmit() {
       console.log(this.form);
-      saveReimbursement(this.form)
+      saveReimbursement(this.form).then((res)=>{
+        let data = res; 
+        if(data.code==="200000"){
+            this.successMessage(data.message);
+        }else{
+            this.wrongMessage(data.message);
+        }
+      })
     },
     uploadFile(e) {
       let formData = new FormData();

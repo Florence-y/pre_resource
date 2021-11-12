@@ -169,7 +169,7 @@ import {
   listReimbursementRequestRecords,
 } from "../../network/MyRequest";
 import ReimbursementUploadModel from "../../components/common/ReimbursementUploadModel.vue";
-
+import { ElMessage } from "element-plus";
 export default {
   name: "MyRequest",
   components: { NavBar, ReimbursementUploadModel },
@@ -235,6 +235,7 @@ export default {
     next() {
       let status = this.curStatus;
       let current = this.current + 1;
+      this.current = current;
       if (status == 0) {
         listResourceRequestRecords({
           current,
@@ -256,7 +257,8 @@ export default {
     },
     last() {
       let status = this.curStatus;
-      let current = this.current - 1 < 0 ? 1 : this.current - 1;
+      let current = this.current - 1 <= 0 ? 1 : this.current - 1;
+      this.current = current;
       if (status == 0) {
         listResourceRequestRecords({
           current,
@@ -275,6 +277,20 @@ export default {
           this.dataList = data.records;
         });
       }
+    },
+    successMessage(message) {
+      ElMessage({
+        showClose: true,
+        message: message,
+        type: "success",
+      });
+    },
+    wrongMessage(message) {
+      ElMessage({
+        showClose: true,
+        message: message,
+        type: "error",
+      });
     },
   },
   created() {
