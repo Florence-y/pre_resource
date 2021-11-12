@@ -46,17 +46,37 @@
         <thead>
           <tr>
             <th>序号</th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th>申请人学号</th>
+            <th>资源名</th>
+            <th>数量</th>
+            <th>申请原因及去向</th>
+            <th>申请时间</th>
+            <th>证明图片</th>
+            <th>审核状态</th>
+            <th>审核人回复</th>
           </tr>
         </thead>
         <tbody v-show="curStatus === 0" class="myRequestResource">
           <tr v-for="item in dataList" :key="item.id">
-            <th>{{ item.id }}</th>
-            <td>{{ item.name1 }}</td>
-            <td>{{ item.name2 }}</td>
-            <td>{{ item.localtion }}</td>
+            <td>{{ item.id }}</td>
+            <td>{{ item.userNumber }}</td>
+            <td>{{ item.resourceName }}</td>
+            <td>{{ item.changeAmount }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.operateTime }}</td>
+            <td>{{ item.img }}</td>
+            <td>
+              {{
+                item.status == 0
+                  ? "待审核"
+                  : item.status == 1
+                  ? "已审核"
+                  : "已拒绝"
+              }}
+            </td>
+            <td>
+              {{ item.statusDescription ? item.statusDescription : "无" }}
+            </td>
           </tr>
         </tbody>
         <tbody v-show="curStatus === 1" class="myRequestReimbursement">
@@ -86,6 +106,7 @@
 
 <script>
 import NavBar from "../nav/NavBar.vue";
+import { listResourceRequestRecords } from "../../network/MyRequest";
 export default {
   name: "MyRequest",
   components: { NavBar },
@@ -123,13 +144,14 @@ export default {
     },
     getResourceRequestList() {
       this.curStatus = 0;
-      this.dataList = [
-        { id: 0, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 0, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 0, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 0, name1: "abc", name2: "abc", localtion: "abc" },
-        { id: 0, name1: "abc", name2: "abc", localtion: "abc" },
-      ];
+      listResourceRequestRecords({
+        current: 1,
+        size: 3,
+      }).then((res) => {
+        let data = res.data;
+        this.dataList = data.records;
+        console.log(data.records);
+      });
     },
     getReimbursementRequestList() {
       this.curStatus = 1;
@@ -152,6 +174,7 @@ export default {
       ];
     },
   },
+  created() {},
 };
 </script>
 

@@ -136,6 +136,9 @@ export default {
         this.$router.push("/myRequest");
       }
     },
+    changeAvatar() {
+      this.avtarUrl = this.$imgBaseUrl + this.$userInf.avatar;
+    },
   },
   beforeCreate() {
     isLogin().then((res) => {

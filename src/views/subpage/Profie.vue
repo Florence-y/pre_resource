@@ -1,5 +1,5 @@
 <template>
-  <nav-bar></nav-bar>
+  <nav-bar ref="profieNarvar"></nav-bar>
   <div class="profieContainer flex space-x-10">
     <div class="profieleft flex-grow-0 m-5">
       <div class="py-4 artboard artboard-demo bg-base-200">
@@ -74,7 +74,7 @@
       <div class="profieHeader">
         <div class="avatar flex space-x-1.5">
           <div class="mb-8 rounded-btn w-24 h-24">
-            <img :src="this.$imgBaseUrl+user.avatar" />
+            <img :src="this.$imgBaseUrl + user.avatar" />
           </div>
           <div style="position: relative">
             <button class="btn">上传头像</button>
@@ -194,7 +194,7 @@ export default {
       formData.append("file", e.target.files[0]);
       upload(formData).then((res) => {
         let url = res.data;
-        this.user.avatar =url;
+        this.user.avatar = url;
         // this.user.avatar = url;
       });
     },
@@ -213,8 +213,15 @@ export default {
         (res) => {
           console.log(res);
           let data = res.data;
-          if (res.code === '200000') {
+          if (data.code === "200000") {
             this.successMessage(data.message);
+            this.$userInf.avatar = data.data.avatar;
+            this.$userInf.role = data.data.role;
+            this.user.name = data.data.name;
+            this.user.department = data.data.department;
+            this.user.major = data.data.major;
+            this.user.avatar = data.data.avatar;
+            this.$refs.profieNarvar.changeAvatar();
           } else {
             this.wrongMessage(data.message);
           }
@@ -248,7 +255,6 @@ export default {
       this.user.department = data.data.department;
       this.user.major = data.data.major;
       this.user.avatar = data.data.avatar;
-      console.log(this.$userInf.avatar);
     });
   },
 };

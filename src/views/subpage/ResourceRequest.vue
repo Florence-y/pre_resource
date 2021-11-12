@@ -80,6 +80,9 @@
 import NavBar from "../nav/NavBar.vue";
 import UploadModel from "../../components/common/UploadModel.vue";
 import { getResourceByCondition } from "../../network/ResourceRequest";
+
+
+
 export default {
   name: "resource",
   components: { NavBar, UploadModel },
