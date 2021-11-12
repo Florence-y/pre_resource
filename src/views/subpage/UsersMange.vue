@@ -9,42 +9,51 @@
               <input type="checkbox" class="checkbox" />
             </label>
           </th>
-          <th>Name</th>
-          <th>Job</th>
-          <th>Favorite Color</th>
-          <th>用户角色</th>
+          <th>id</th>
+          <th>学号</th>
+          <th>名字</th>
+          <th>头像</th>
+          <th>学院与专业</th>
+          <th>权限</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="user in users" :key="user.name">
-          <th>
+          <td>
             <label>
               <input type="checkbox" class="checkbox" />
             </label>
-          </th>
+          </td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.number }}</td>
+          <td>
+            <div>
+              <div class="font-bold">{{ user.name }}</div>
+              <div class="text-sm opacity-50">Russia</div>
+            </div>
+          </td>
           <td>
             <div class="flex items-center space-x-3">
               <div class="avatar">
                 <div class="w-12 h-12 mask mask-squircle">
-                  <img :src="require('../../assets/avtar/'+user.url)" alt="Avatar Tailwind CSS Component" />
+                  <img
+                    :src="this.$imgBaseUrl + user.avatar"
+                    alt="Avatar Tailwind CSS Component"
+                  />
                 </div>
-              </div>
-              <div>
-                <div class="font-bold">{{ user.name }}</div>
-                <div class="text-sm opacity-50">Russia</div>
               </div>
             </div>
           </td>
           <td>
-            {{ user.job }}
+            {{ user.department }}
             <br />
-            <span class="badge badge-outline badge-sm">Office Assistant I</span>
+            <span class="badge badge-outline badge-sm">{{ user.major }}</span>
           </td>
-          <td>{{ user.location }}</td>
           <th>
             <select
               v-if="user.role == 0"
               class="select select-bordered w-full max-w-xs"
+              
             >
               <option selected="selected">浏览者</option>
               <option>资源管理者</option>
@@ -76,38 +85,22 @@
 
 <script>
 import NavBar from "../nav/NavBar.vue";
+import { userList } from "../../network/UserManage";
 // import ElementUpload from "../../components/common/Element-Upload.vue"
 export default {
   name: "UsersManage",
   components: { NavBar },
   data() {
     return {
-      users: [
-        {
-          name: "吴彦臻",
-          job: "教务处",
-          location: "北京",
-          role: 0,
-          url: "1.jpg",
-        },
-        {
-          name: "吴晓吟",
-          job: "财务处",
-          location: "上海",
-          role: 1,
-          url: "2.jpg",
-        },
-        {
-          name: "吴小文",
-          job: "党建办",
-          location: "广州",
-          role: 2,
-          url: "3.jpg",
-        },
-      ],
+      users: [],
     };
   },
-  methods: {
+  methods: {},
+  created() {
+    userList().then((res) => {
+      let data = res.data;
+      this.users = data.data;
+    });
   },
 };
 </script>
