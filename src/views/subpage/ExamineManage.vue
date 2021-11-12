@@ -43,6 +43,7 @@
             <th>证明图片</th>
             <th>审核状态</th>
             <th>审核人回复</th>
+            <th>操作</th>
           </tr>
         </thead>
         <thead v-if="curStatus === 1">
@@ -56,6 +57,7 @@
             <th>证明图片</th>
             <th>申请时间</th>
             <th>审核状态</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody v-if="curStatus === 0" class="myRequestResource">
@@ -75,17 +77,39 @@
               ></div>
             </td>
             <td>
-              {{
-                item.status == 0
-                  ? "待审核"
-                  : item.status == 1
-                  ? "已审核"
-                  : "已拒绝"
-              }}
+              <select
+                v-if="item.status == 0"
+                class="select select-bordered w-full max-w-xs"
+              >
+                <option selected="selected">未审核</option>
+                <option>通过</option>
+                <option>拒绝</option>
+              </select>
+              <select
+                v-if="item.status == 1"
+                class="select select-bordered w-full max-w-xs"
+              >
+                <option>未审核</option>
+                <option selected="selected">通过</option>
+                <option>拒绝</option>
+              </select>
+              <select
+                v-if="item.status == 2"
+                class="select select-bordered w-full max-w-xs"
+              >
+                <option>未审核</option>
+                <option>通过</option>
+                <option selected="selected">拒绝</option>
+              </select>
             </td>
             <td>
               {{ item.statusDescription ? item.statusDescription : "无" }}
             </td>
+            <td v-if="item.status == 0" class="flex justify-center space-x-2">
+              <label class="btn btn-primary">同意</label>
+              <agree-model :id="item.id"></agree-model>
+            </td>
+            <td v-if="item.status != 0">已操作</td>
           </tr>
         </tbody>
         <tbody v-if="curStatus === 1" class="myRequestReimbursement">
@@ -107,14 +131,36 @@
             </td>
             <td>{{ item.eventStartTime }}</td>
             <td>
-              {{
-                item.status == 0
-                  ? "待审核"
-                  : item.status == 1
-                  ? "已审核"
-                  : "已拒绝"
-              }}
+              <select
+                v-if="item.status == 0"
+                class="select select-bordered w-full max-w-xs"
+              >
+                <option selected="selected">未审核</option>
+                <option>通过</option>
+                <option>拒绝</option>
+              </select>
+              <select
+                v-if="item.status == 1"
+                class="select select-bordered w-full max-w-xs"
+              >
+                <option>未审核</option>
+                <option selected="selected">通过</option>
+                <option>拒绝</option>
+              </select>
+              <select
+                v-if="item.status == 2"
+                class="select select-bordered w-full max-w-xs"
+              >
+                <option>未审核</option>
+                <option>通过</option>
+                <option selected="selected">拒绝</option>
+              </select>
             </td>
+            <td v-if="item.status == 0" class="flex justify-center space-x-2">
+              <label class="btn btn-primary">同意</label
+              ><label class="btn btn-primary">拒绝</label>
+            </td>
+            <td v-if="item.status != 0">已操作</td>
           </tr>
         </tbody>
       </table>
@@ -131,6 +177,7 @@
 <script>
 import NavBar from "../nav/NavBar.vue";
 import ExamineMenu from "../menu/ExamineMenu.vue";
+import AgreeModel from "../../components/common/AgreeModel.vue";
 import {
   listResourceRequestRecordsByCondition,
   listReimbursementRequestRecordsByCondition,
@@ -146,7 +193,8 @@ export default {
       dataList: [],
     };
   },
-  components: { NavBar, ExamineMenu },
+  components: { NavBar, ExamineMenu, AgreeModel },
+  // components: { NavBar, ExamineMenu,},
   methods: {
     getResourceByType(type) {
       this.curStatus = type;
